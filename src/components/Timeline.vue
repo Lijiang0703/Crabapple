@@ -20,8 +20,8 @@
 				</div>
 			</template>
 		</div>
-		<div class="time-current">  
-			
+		<div class="time-current">
+
 		</div>
 	</div>
 </template>
@@ -35,7 +35,7 @@
 				currentD:'',
 				length:10,
 				timeNodes:[
-					{	
+					{
 						year: 18,
 						months:[
 							{
@@ -97,7 +97,7 @@ body
 	width: 100%
 	height: 200px
 	padding-top:50px
-	overflow:hidden	
+	overflow:hidden
 	.row-line
 		height:0px
 		width: 100%
@@ -114,7 +114,7 @@ body
 			&:after
 				content:''
 				clear:both
-	.node 
+	.node
 		color: white
 		width: 30px
 		font-size:16px
@@ -132,7 +132,7 @@ body
 		color: white
 .inner-inline
 	display:inline-block
-	* 
+	*
 		display:inline-block
 .line
 	position:absolute
@@ -169,6 +169,6 @@ body
 			left:-2.5px
 	.node-year
 		display:block
-		bottom:30px	
+		bottom:30px
 		transform:translateX(-50%)
 </style>
