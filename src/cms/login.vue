@@ -7,8 +7,8 @@
           <span>Crabble</span>
         </div>
         <div class="accout-type">
-          <span @click=switchType(0) class="">邮箱</span>
-          <span @click=switchType(1) class="active">微信</span>
+          <span @click=switchType(0) :class="{active: type===0}">邮箱</span>
+          <span @click=switchType(1) :class="{active: type===1}">微信</span>
         </div>
         <div class="accout-input">
           <div class="email-input" v-show="type === 0">
@@ -65,15 +65,17 @@
 .login
   transform: translate(-50%,-50%)
   position: fixed
-  top: 50%
+  top: 40%
   left: 50%
   width: 20%
   min-width: 300px
+  min-height: 350px
   padding: 5px 30px
   box-sizing: border-box
   border:1px solid #000
   .content
     .main
+      padding-bottom: 50px
       .logo
         margin-top: 20px
         margin-bottom:20px
@@ -82,7 +84,7 @@
           font-weight: bold
       .accout-type
         width:auto
-        margin-bottom:10px
+        margin-bottom:20px
         display: flex
         justify-content: center
         span
@@ -92,9 +94,8 @@
           &.active
             border-bottom: 2px solid rgb(65, 70, 75)
       .accout-input
-        padding-top: 10px
-        margin-bottom: 20px
         .email-input
+          min-height: 150px
           .input-box
             input,button
               font-size: 15px
@@ -111,4 +112,8 @@
               padding: 5px 20px
               background: rgb(65, 70, 75)
               color: #fff
+        .wx-qrcode
+            img
+              width: 150px
+              height: 150px
 </style>
