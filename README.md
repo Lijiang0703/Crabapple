@@ -1,4 +1,4 @@
-# Crabaaple
+# Crabapple
 > A personal Vue.js project include cms and font-end display. In the last update.
 
 ## Build Setup
