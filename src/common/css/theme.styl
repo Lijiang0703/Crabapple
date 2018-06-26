@@ -5,6 +5,28 @@
     &:not(.is-disabled):hover,&:not(.is-disabled):active
       background-color: $common_color
       color: $common_text_color
+.el-tabs.el-tabs--border-card
+  box-shadow: none
+  -webkit-box-shadow: none
+  .el-tabs__header.is-top
+    background-color: $common_color
+    .el-tabs__nav-wrap
+      .el-tabs__item
+        background-color: $common_color
+        color: $active_color
+        &:hover
+          color: $active_color
+        &.is-active
+          color: #efebeb
+          background-color: $common_text_color
+.el-input
+  .el-input__inner
+    &:focus
+      border-color: $high_simple_color
+.el-button.is-plain:focus, .el-button.is-plain:hover
+  border-color: #dcdfe6
+  color: #fff
+  background: $active_color
 *
   padding: 0
   margin: 0
