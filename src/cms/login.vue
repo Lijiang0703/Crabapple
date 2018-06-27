@@ -38,6 +38,7 @@
 </template>
 
 <script>
+  import check from '@/api/login'
   export default {
     name: "login",
     data(){
@@ -54,8 +55,15 @@
         this.type = type;
       },
       login: function(){
-        const email = this.refs.email.value
-        const password = this.refs.password.value
+        const email = this.$refs.email.value
+        const password = this.$refs.password.value
+
+        check({
+          user_name : email,
+          user_password: password
+        }).then((res)=>{
+          console.log(res)
+        })
       }
     }
   }
