@@ -18,6 +18,9 @@
             <div class="input-box">
                 <input type="password" name="" value="" placeholder="密码" ref="password">
             </div>
+            <div class="info">
+              <span>* 账户/密码错误</span>
+            </div>
             <div class="input-box">
                 <button type="button" name="button" @click="login">登录</button>
             </div>
@@ -104,6 +107,8 @@
       .accout-input
         .email-input
           min-height: 150px
+          .info
+            color: red
           .input-box
             input,button
               font-size: 15px
