@@ -5,36 +5,37 @@ import Login from '@/cms/login'
 import Workspace from '@/cms/workspace'
 import Statistic from '@/cms/statistic'
 import Content from '@/cms/content'
+import Home from '@/frontsite/home/home'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      redirect: Timeline
-    },
-    {
       path: '/login',
       name: 'login',
       component: Login
     },
     {
-      path: '/Workspace',
-      name: 'workspace',
+      path: '/',
+      // name: 'workspace',
       component: Workspace,
       children:[
         {
-          path:'statistic',
+          path:'/statistic',
           name: 'statistic',
           component: Statistic
         },
         {
-          path:'content',
+          path:'/content',
           name: 'content',
           component: Content
         }
       ]
+    },
+    {
+      path: '/home',
+      component: Home
     }
   ]
 })
