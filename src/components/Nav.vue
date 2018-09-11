@@ -49,6 +49,7 @@ export default{
   position: fixed
   width: 250px
   height: 100%
+  z-index: 1
   top: 0
   background: $g-black
   .logo
@@ -58,6 +59,7 @@ export default{
   .menus
     li
       padding-bottom: 15px
+      cursor: pointer
   .menu-text
     text-align: left
     font-weight: 400

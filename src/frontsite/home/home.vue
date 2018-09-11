@@ -8,7 +8,15 @@
           </div>
           <div class="content">
             <div class="banner">
-
+              <div class="paly-video">
+                <i>play</i>
+              </div>
+              <div class="wishes">
+                <span>theShortfilm</span>
+              </div>
+              <div class="prologue">
+                <span>PROLOGUE</span>
+              </div>
             </div>
             <div class="p-grid">
               <div class="column-title">
@@ -27,38 +35,34 @@
               <div class="column-title">
                 <h2>Introduction of </h2>
               </div>
+              <div class="introduction">
+                <div class="interest">
+
+                </div>
+                <div class="skill">
+
+                </div>
+                <div class="days">
+
+                </div>
+              </div>
             </div>
             <div class="motto">
 
             </div>
             <Gradient></Gradient>
-            <div class="timeline">
-              <div class="time">
-                <div class="number-wrap">
-                  <div class="years">
-                    <span>2018</span>
-                  </div>
-                  <h3>years</h3>
-                </div>
-                <div class="number-wrap">
-                  <div class="months">
-                    <span>09</span>
-                  </div>
-                  <h3>months</h3>
-                </div>
-                <div class="number-wrap">
-                  <div class="days">
-                    <span>09</span>
-                  </div>
-                  <h3>days</h3>
-                </div>
-              </div>
-            </div>
+            <SDate></SDate>
             <div class="ending">
 
             </div>
             <div class="footer">
-
+              <div class="copyright">
+                 © 2018 Crabble - Blog. All Rights Reserved.
+                 <span class="strong">Thanks</span>
+                 <div class="email">
+                   <i>email</i>
+                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -73,6 +77,7 @@
 import Nav from "@/components/Nav"
 import More from "@/components/tools/more"
 import Gradient from "@/components/tools/gradient"
+import SDate from "@/components/S-date"
 export default{
   data(){
     return {
@@ -80,6 +85,8 @@ export default{
         {
           src: "../../assets/P1010164.JPG"
         },
+        {},
+        {},
         {}
       ]
     }
@@ -87,7 +94,8 @@ export default{
   components:{
     Nav,
     More,
-    Gradient
+    Gradient,
+    SDate
   }
 }
 </script>
@@ -124,21 +132,44 @@ export default{
     .column-title
       color: $site_normal
       font-size: 38px
+    .p-grid,.footer
+      padding-left: $content_padding
+      padding-right: $content_padding
     .p-grid
       .grid
         display: flex
+        flex-wrap: wrap
+        justify-content: center
         .grid-item
-          flex-wrap: wrap
+          width: 50%
+          box-sizing: border-box
           .photo-wrap
+            margin-left: 5px
+            margin-right: 5px
+            /* 正方形或者其他比例的 */
+            height: 0
+            width: 100%
+            padding-bottom: 76.9%
+            position: relative
             img
-              width: 300px
-              height: 300px
-
-    .timeline
-      color: $site_normal
-      background: $g-black
-      .number-wrap
-        div
-          font-size: 60px
-          font-weight: 400
+              position: absolute
+              width: 100%
+              height: 100%
+              left: 0
+              top: 0
+              padding: 10px
+              box-sizing: border-box
+    .footer
+      padding-top: 30px
+      padding-bottom: 30px
+      border-top: 1px solid rgba(255,255,255,0.1)
+      background-color: $g-black
+      text-align: left
+      font-family: "PT Serif", Arial, Tahoma, sans-serif
+      position: relative
+      display: flex
+      .copyright
+        width: 100%
+        .email
+          float: right
 </style>
