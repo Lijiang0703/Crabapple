@@ -46,11 +46,11 @@ export default{
 .simple-date
   color: $site_normal
   background: $g-black
-  padding-bottom: 50px
+  padding-bottom: $padding-v
   .time
     display: flex
-    padding-top: 50px
-    padding-bottom: 50px
+    padding-top: $padding-v
+    padding-bottom: $padding-v
     width: 100%
     justify-content: center
   .number-wrap

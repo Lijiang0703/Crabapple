@@ -8,16 +8,26 @@
           </div>
           <div class="content">
             <div class="banner">
-              <div class="paly-video">
-                <i>play</i>
+              <div class="play-video">
+                <img src="../../assets/play_icon.svg" @mouseover="updateIcon" @click="playVideo"/>
               </div>
               <div class="wishes">
-                <span>theShortfilm</span>
+                <span class="active">the<span class="normal">Short</span>film</span>
               </div>
               <div class="prologue">
                 <span>PROLOGUE</span>
               </div>
             </div>
+            <div class="course">
+              <div class="">
+                <span>我思う、ゆえに我あり。</span>
+                <span>君が微笑むと、光が世界に満ちる</span>
+              </div>
+              <div class="">
+                <span>頑固、桃 一かはちか</span>
+              </div>
+            </div>
+            <Gradient></Gradient>
             <div class="p-grid">
               <div class="column-title">
                 <h2>Photos</h2>
@@ -25,25 +35,42 @@
               <div class="grid">
                 <div class="grid-item" v-for="item in photos">
                   <div class="photo-wrap">
-                    <img src="../../assets/1.jpg" alt="">
+                    <div class="wrap">
+                      <div class="photo">
+                        <img src="../../assets/1.jpg" alt="">
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <!-- <More></More> -->
               </div>
-              <More></More>
             </div>
+            <Gradient :top="false"></Gradient>
             <div class="self-introduction">
               <div class="column-title">
-                <h2>Introduction of </h2>
+                <h2>Introduction</h2>
               </div>
               <div class="introduction">
-                <div class="interest">
-
+                <div class="intro-item interest">
+                  <div class="">
+                    我思う、ゆえに我あり。
+                    我思う、ゆえに我あり。
+                  </div>
+                  <p class="strong">interest</p>
                 </div>
-                <div class="skill">
-
+                <div class="intro-item skill">
+                  <div class="">
+                    君が微笑むと、光が世界に満ちる
+                    君が微笑むと、光が世界に満ちる
+                  </div>
+                  <p class="strong">技能</p>
                 </div>
-                <div class="days">
-
+                <div class="intro-item days">
+                  <div class="">
+                    我思う、ゆえに我あり。
+                    君が微笑むと、光が世界に満ちる
+                  </div>
+                  <p class="strong">days</p>
                 </div>
               </div>
             </div>
@@ -60,7 +87,7 @@
                  © 2018 Crabble - Blog. All Rights Reserved.
                  <span class="strong">Thanks</span>
                  <div class="email">
-                   <i>email</i>
+                   <img src="../../assets/email.svg"/>
                  </div>
               </div>
             </div>
@@ -96,17 +123,24 @@ export default{
     More,
     Gradient,
     SDate
+  },
+  methods:{
+    updateIcon(){
+
+    },
+    playVideo(){
+
+    }
   }
 }
 </script>
 
 <style lang="stylus">
 @import '~@/common/css/base'
-
 .right-content
   position: absolute
   left: 0
-  padding-left: 250px
+  padding-left: $navwidth
   box-sizing: border-box
   width: 100%
   color: $site_normal
@@ -118,11 +152,11 @@ export default{
     position: fixed
     top: 0
     bottom: 0
-    left: 0
+    left: $navwidth
     right: 0
     z-index: -2
   .back-mask
-    background: rgba(0,0,0,0.7)
+    background: rgba(0,0,0,0.8)
     z-index: -1
     width: 100%
     height: 100%
@@ -132,10 +166,42 @@ export default{
     .column-title
       color: $site_normal
       font-size: 38px
-    .p-grid,.footer
+      margin-bottom: $padding-v
+    .banner,.p-grid,.self-introduction,.motto,.ending,.footer
       padding-left: $content_padding
       padding-right: $content_padding
+    .banner
+      height: 100vh
+      padding-top: 100px
+      padding-bottom: 100px
+      box-sizing: border-box
+      .play-video
+        margin-top: 80px
+        margin-bottom: $padding-v
+        cursor: pointer
+      .wishes
+        .normal
+          font-size: 30px
+          line-height: 30px
+      .prologue
+        font-size: 100px
+        line-height: 100px
+        color: $site_strong
+        font-weight: bolder
+    .self-introduction
+      /* background: $g-black-op */
+      .introduction
+        display: flex
+        padding-bottom: $padding-v
+        .intro-item
+          padding: 0 20px
+          flex-grow: 1
+          align-items: center
+          p
+            margin-top: 30px
+            font-size: 20px
     .p-grid
+      background: $g-black
       .grid
         display: flex
         flex-wrap: wrap
@@ -151,7 +217,7 @@ export default{
             width: 100%
             padding-bottom: 76.9%
             position: relative
-            img
+            .wrap
               position: absolute
               width: 100%
               height: 100%
@@ -159,6 +225,18 @@ export default{
               top: 0
               padding: 10px
               box-sizing: border-box
+              .photo
+                width: 100%
+                height: 100%
+                overflow: hidden
+              img
+                cursor: pointer
+                width: 100%
+                height: auto
+                transform: scale(1)
+                transition: all ease-in-out 0.3s
+                &:hover
+                    transform: scale(1.1)
     .footer
       padding-top: 30px
       padding-bottom: 30px
