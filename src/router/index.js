@@ -6,6 +6,7 @@ import Workspace from '@/cms/workspace'
 import Statistic from '@/cms/statistic'
 import Content from '@/cms/content'
 import Home from '@/frontsite/home/home'
+import Photo from '@/frontsite/photo/photo'
 
 Vue.use(Router)
 
@@ -36,6 +37,10 @@ export default new Router({
     {
       path: '/home',
       component: Home
+    },
+    {
+      path:'/photo',
+      component: Photo
     }
   ]
 })
