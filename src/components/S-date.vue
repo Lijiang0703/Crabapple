@@ -3,19 +3,19 @@
     <div class="time">
       <div class="number-wrap">
         <div class="years">
-          <span>18</span>
+          <span v-text="year"></span>
         </div>
         <h3>years</h3>
       </div>
       <div class="number-wrap">
         <div class="months">
-          <span>09</span>
+          <span v-text="month"></span>
         </div>
         <h3>months</h3>
       </div>
       <div class="number-wrap">
         <div class="days">
-          <span>09</span>
+          <span v-text="day"></span>
         </div>
         <h3>days</h3>
       </div>
@@ -35,6 +35,20 @@
 export default{
   props:{
 
+  },
+  computed:{
+    date(){
+      return new Date() //选取本地时间
+    },
+    year(){
+      return this.date.getUTCFullYear().toString().slice(2)
+    },
+    month(){
+      return this.date.getMonth()+1
+    },
+    day(){
+      return this.date.getDate()
+    }
   },
   methods:{
 

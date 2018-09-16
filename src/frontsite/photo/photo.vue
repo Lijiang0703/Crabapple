@@ -64,7 +64,7 @@ export default {
 
     },
     next(){
-      
+
     }
   }
 }
@@ -73,14 +73,28 @@ export default {
 <style lang="stylus">
 @import '~@/common/css/base'
 
-$space = 100px
+/* space()
+  @media screen and (min-width: 1024px)
+    return 100px
+  @media screen and (max-width: 1023px) and (min-width: 768px)
+    return 50px
+  @media screen and (max-width: 767px) and (min-width: 480px)
+    return 20px */
+
+/* $space = 100px*/
 $item_width = 24.99%
 $search_width = 50%
 
+
 .photo-page
-  /* background: $g-black */
-  padding-left: $space
-  padding-right: $space
+  @media screen and (min-width: 1024px)
+    padding: 0 100px
+  @media screen and (max-width: 1023px) and (min-width: 768px)
+    padding: 0 50px
+  @media screen and (max-width: 767px)
+    padding: 0 20px
+  /* padding-left: space()
+  padding-right space() */
   .header
     padding-bottom: 40px
     padding-top: 40px
@@ -107,8 +121,8 @@ $search_width = 50%
   .photos
     padding-top: 50px
     padding-bottom: 50px
-    border-top: 1px solid #e2e2e2
-    border-bottom: 1px solid #e2e2e2
+    border-top: 1px solid
+    border-bottom: 1px solid $border_color
     text-align: left
     .summary
       text-align: center
@@ -117,8 +131,13 @@ $search_width = 50%
       display: flex
       flex-wrap: wrap
       .photo-item
-        width: $item_width
-        border-color: #e2e2e2
+        @media screen and (min-width: 1024px)
+          width: 24.99%
+        @media screen and (max-width: 1023px) and (min-width: 768px)
+          width: 49.9%
+        @media screen and (max-width: 767px) and (min-width: 480px)
+          width: 99%
+        border-color: $border_color
         img
           cursor: pointer
           width: 100%
@@ -132,16 +151,23 @@ $search_width = 50%
       text-align: center
       margin-top: 30px
       display: flex
-      justify-content: space-between
+      justify-content: center
       span
-        border: 1px solid #e2e2e2
+        margin-right: 10px
+        border: 1px solid $border_color
         display: inline-block
         padding: 5px 10px
         border-radius: 10px
         font-weight: 400
         transition: all ease 0.2s
         cursor: pointer
-        &:hover
-          background: $g-black
-          color: $site_normal
+
+        &:last-child
+          &:hover
+            background: $site_strong
+            color: $white
+        &:first-child
+          &:hover
+            background: $g-black
+            color: $site_normal
 </style>

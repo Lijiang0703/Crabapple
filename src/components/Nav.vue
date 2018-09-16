@@ -7,7 +7,7 @@
       <div class="menus">
         <ul>
           <li v-for="item in menus">
-            <a :href="item.url" v-text="item.title" class="menu-text" :class="{strong : item.strong}"></a>
+            <a @click="toUrl(item.url)" v-text="item.title" class="menu-text" :class="{strong : item.strong}"></a>
           </li>
         </ul>
       </div>
@@ -25,8 +25,8 @@ export default{
           title: "Start"
         },
         {
-          url: "start",
-          title: "Review"
+          url: "photo",
+          title: "Photos"
         },
         {
           url: "start",
@@ -38,6 +38,15 @@ export default{
           strong: true
         }
       ]
+    }
+  },
+  methods:{
+    toUrl(url,e){
+      this.$router.push({
+        name: url
+      })
+      e && e.preventDefault()
+      return false
     }
   }
 }
