@@ -70,38 +70,42 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 @import '~@/common/css/base'
-
-/* space()
-  @media screen and (min-width: 1024px)
-    return 100px
-  @media screen and (max-width: 1023px) and (min-width: 768px)
-    return 50px
-  @media screen and (max-width: 767px) and (min-width: 480px)
-    return 20px */
-
-/* $space = 100px*/
-$item_width = 24.99%
-$search_width = 50%
+@media screen and (min-width: 1024px)
+  .photo-page
+    padding: 0 100px
+    .search
+      width: 50%
+    .photo-item
+      width: 24.99%
+@media screen and (max-width: 1023px) and (min-width: 768px)
+  .photo-page
+    padding: 0 50px
+    .search
+      width: 80%
+    .photo-item
+      width: 49.99%
+    .footer
+      font-size: 16px
+@media screen and (max-width: 767px)
+  .photo-page
+    padding: 0 20px
+    .search
+      width: 100%
+    .photo-item
+      width: 99.99%
+    .footer
+      font-size: 14px
 
 
 .photo-page
-  @media screen and (min-width: 1024px)
-    padding: 0 100px
-  @media screen and (max-width: 1023px) and (min-width: 768px)
-    padding: 0 50px
-  @media screen and (max-width: 767px)
-    padding: 0 20px
-  /* padding-left: space()
-  padding-right space() */
   .header
     padding-bottom: 40px
     padding-top: 40px
     .logo img
       width: 70px
     .search
-      width: $search_width
       transform: translateX(-50%)
       margin-left: 50%
       input
@@ -131,12 +135,6 @@ $search_width = 50%
       display: flex
       flex-wrap: wrap
       .photo-item
-        @media screen and (min-width: 1024px)
-          width: 24.99%
-        @media screen and (max-width: 1023px) and (min-width: 768px)
-          width: 49.9%
-        @media screen and (max-width: 767px) and (min-width: 480px)
-          width: 99%
         border-color: $border_color
         img
           cursor: pointer
@@ -170,4 +168,5 @@ $search_width = 50%
           &:hover
             background: $g-black
             color: $site_normal
+
 </style>
