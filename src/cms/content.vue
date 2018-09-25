@@ -1,25 +1,7 @@
 <template>
     <el-container class="content">
       <el-header class="content_head" height="50px">
-        <el-row type="flex" align="middle" style="height:100%">
-          <el-col :span= "2">
-            <el-button plain icon="el-icon-plus">新建</el-button>
-          </el-col>
-          <el-col :span= "2">
-            <el-button plain icon="el-icon-upload2">发布</el-button>
-          </el-col>
-          <el-col :span= "2">
-            <el-button plain icon="el-icon-delete">删除</el-button>
-          </el-col>
-          <el-col :span="4" :offset="14">
-            <el-input
-              placeholder="搜索"
-              suffix-icon="el-icon-search"
-              size ="medium"
-              >
-            </el-input>
-          </el-col>
-        </el-row>
+        <Topbar></Topbar>
       </el-header>
       <el-main>
         <div class="filter">
@@ -72,6 +54,7 @@
 
 <script>
 import contentEdit from "@/cms/contentEdit"
+import Topbar from "@/components/topbar"
 export default{
   data(){
     return {
@@ -125,7 +108,8 @@ export default{
     }
   },
   components:{
-    contentEdit
+    contentEdit,
+    Topbar
   }
 }
 </script>

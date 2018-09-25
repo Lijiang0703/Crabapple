@@ -37,6 +37,13 @@
                     <i class="el-icon-document"></i>
                     <span>内容管理</span>
                   </el-menu-item>
+                  <el-menu-item
+                    index="3"
+                    route="picture"
+                    >
+                    <i class="el-icon-picture"></i>
+                    <span>图片管理</span>
+                  </el-menu-item>
                 </el-menu>
               </el-main>
               <el-footer></el-footer>
