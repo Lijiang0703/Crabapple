@@ -18,7 +18,7 @@
             <div class="input-box">
                 <input type="password" name="" value="" placeholder="密码" ref="password">
             </div>
-            <div class="info">
+            <div class="info" v-show="log_fail">
               <span>* 账户/密码错误</span>
             </div>
             <div class="input-box">
@@ -46,7 +46,8 @@
     name: "login",
     data(){
       return {
-        type: 0
+        type: 0,
+        log_fail: false
       }
     },
     created:function(){
@@ -65,7 +66,14 @@
           user_name : email,
           user_password: password
         }).then((res)=>{
-          console.log(res)
+          if(res.code == 200){
+            this.log_fail = false
+            this.$router.push({
+              name: "workspace"
+            })
+          }
+          else
+            this.log_fail = true
         })
       }
     }
