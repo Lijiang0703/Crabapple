@@ -22,7 +22,6 @@
         </div>
       </el-main>
     </div>
-
   </div>
 </template>
 <script>
@@ -34,13 +33,15 @@ export default {
   },
   methods:{
     create(){
-
+      this.$router.push({
+        name: 'pic_edit'
+      })
     },
     publish(){
 
     },
     remove(){
-      
+
     }
   }
 }

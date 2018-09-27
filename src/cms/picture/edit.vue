@@ -9,7 +9,12 @@
       </el-form-item>
       <el-form-item label="图片地址/上传图片">
         <el-upload
-          :file-list="pictureList"
+          :file-list="picData.pictures"
+          action="http://upload.qiniup.com"
+          :data="picData.uploadData"
+          :before-upload="handleBeforeUpload"
+          :on-success="handleSuccess"
+          :on-error="handleError"
           list-type="pictures">
           <el-button>upload</el-button>
         </el-upload>
@@ -25,6 +30,7 @@
   </div>
 </template>
 <script>
+import getToken from "../../api/upload"
 export default {
   data(){
     return {
@@ -32,14 +38,34 @@ export default {
         title: "",
         address: "",
         describe: "",
-        pictures:[]
+        pictures:[],
+
+        uploadData: {
+        } //上传时带的参数
       }
     }
   },
   components:{
 
   },
+  mounted(){
+    console.log(1)
+  },
   methods:{
+    handleBeforeUpload(){
+      const $this = this
+      return getToken().then((res)=>{
+        const token = res.data.token
+        $this.picData.uploadData.token = token
+      })
+    },
+    handleSuccess(res){
+      console.log(res)
+      // this.picData.pictures.push()
+    },
+    handleError(res){
+      console.log(res)
+    },
     confirm(){},
     cancel(){}
   }

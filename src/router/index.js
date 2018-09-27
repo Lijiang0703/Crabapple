@@ -6,6 +6,7 @@ import Workspace from '@/cms/workspace'
 import Statistic from '@/cms/statistic'
 import Content from '@/cms/content'
 import Picture from '@/cms/picturetown'
+import PicEdit from '@/cms/picture/edit'
 import Home from '@/frontsite/home/home'
 import Photo from '@/frontsite/photo/photo'
 
@@ -37,6 +38,11 @@ export default new Router({
           path:'/picture',
           name: 'picture',
           component: Picture
+        },
+        {
+          path:'pic_edit',
+          name: 'pic_edit',
+          component: PicEdit
         }
       ]
     },
