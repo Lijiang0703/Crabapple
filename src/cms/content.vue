@@ -1,6 +1,6 @@
 <template>
     <el-container class="content">
-      <el-header class="content_head" height="50px">
+      <el-header class="top_head" height="50px">
         <Topbar></Topbar>
       </el-header>
       <el-main>
@@ -117,9 +117,6 @@ export default{
 <style lang="stylus">
 @import '~@/common/css/base'
 .content
-  .content_head
-    background: $common_color
-    border-bottom: 1px solid $common_high_color
   .content_table
     text-align: left
     tr
