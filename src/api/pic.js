@@ -8,5 +8,13 @@ const getPics = ()=>{
       return Promise.resolve(res.data)
     })
 }
+const removePic = ()=>{
+  return axios({
+    
+  })
+}
 
-export default getPics
+export default {
+  getPics,
+  removePic
+}

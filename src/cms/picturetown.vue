@@ -8,18 +8,18 @@
         @remove= "remove">
       </Topbar>
     </el-header>
-      <el-main>
+      <el-main @keyup.delete="remove" @keyup.enter="publish">
         <div class="picture-list">
-          <div class="wrap" v-for="(item,index) in dataList" :class="{select: item.selected}" @click="check(index)">
-            <div class="pic">
+          <div class="wrap" v-for="(item,index) in dataList" :class="{select: item.selected}" @dbclick="edit(index)">
+            <div class="pic" @click="check(index)">
               <img :src="item.url" alt="">
               <i class="el-icon-success published" @click="publish"></i>
             </div>
-            <div class="mask">
+            <!-- <div class="mask">
               <div class="mask-content">
                 <i class="el-icon-edit" @click="edit"></i>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </el-main>
@@ -28,7 +28,7 @@
 </template>
 <script>
 import Topbar from "@/components/topbar"
-import getPics from "@/api/pic"
+import {getPics,removePic} from "@/api/pic"
 
 export default {
   data(){
@@ -41,21 +41,25 @@ export default {
   },
   methods:{
     check(index){
-      const isSelected = this.dataList[index].selected
-      this.dataList[index].selected = !isSelected
+      const list = this.dataList[index]
+      list.selected = !list.selected
+
+      this.dataList.splice(index,1,list) //数组变化的监听
     },
     create(){
       this.$router.push({
         name: 'pic_edit'
       })
     },
-    publish(){
+    publish(){ //批量发布
 
     },
-    remove(){
+    remove(){ //批量删除
+      removePic().then(()=>{
 
+      })
     },
-    edit(){
+    edit(index){
       this.$router.push({
         name: 'pic_edit'
       })
@@ -84,6 +88,7 @@ export default {
         box-sizing: border-box
         box-shadow: 0 0  5px #ccc
         position: relative
+        cursor: pointer
         &.select
           box-shadow: 0 0  5px red
         .pic
@@ -94,7 +99,6 @@ export default {
             width: 100%
             height: 100%
           .published
-            cursor: pointer
             z-index: 10
             font-size: 20px
             position: absolute
@@ -102,6 +106,9 @@ export default {
             right: 5px
             display: inline-block
             color: green
+            transition: all ease 0.3s
+            &:hover
+              transform: scale(1.5)
         .mask
           display: none
           transition: all ease-in-out 5s
