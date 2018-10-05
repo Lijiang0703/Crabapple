@@ -60,7 +60,9 @@
             </div>
           </el-header> -->
           <el-main class="spacewrap">
-            <router-view></router-view>
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
           </el-main>
         </el-col>
       </el-row>

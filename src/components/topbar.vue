@@ -37,8 +37,4 @@ export default {
 </script>
 
 <style lang="stylus">
-/* @import '~@/common/css/base' */
-/* .top_head
-  background: $common_color
-  border-bottom: 1px solid $common_high_color */
 </style>

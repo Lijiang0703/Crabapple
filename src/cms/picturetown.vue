@@ -33,11 +33,17 @@ import {getPics,removePic} from "@/api/pic"
 export default {
   data(){
     return {
-      dataList: []
+      // dataList: []
     }
   },
   components:{
     Topbar,
+  },
+  computed:{
+    dataList:()=>{
+      const list = this.$store.state.pic.list
+      return list
+    }
   },
   methods:{
     check(index){
@@ -55,8 +61,32 @@ export default {
 
     },
     remove(){ //批量删除
-      removePic().then(()=>{
-
+      this.$confirm('确认删除？','提示',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(()=>{
+        //获取当前选中的元素数组
+        let checkedList = []
+        this.dataList.forEach(data=>{
+          if(data.selected)
+            checkedList.push({
+              id: data.id
+            })
+        })
+        removePic(checkedList)
+      }).then(()=>{
+        this.$message({
+          type: 'info',
+          message: '删除成功！'
+        })
+      }).catch((action)=>{
+        if(action == 'cancel'){
+          this.$message({
+            type: 'info',
+            message: '操作取消！'
+          })
+        }
       })
     },
     edit(index){
@@ -69,7 +99,8 @@ export default {
     getPics().then((res)=>{
       if(res.code == 200){
         const data = res.data
-        this.dataList = data;
+        this.$store.dispatch('pic/add',data)
+        // this.dataList = data;
       }
     })
   }

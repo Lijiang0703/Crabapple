@@ -2,8 +2,12 @@ const pic = {
   state: {
      checkedList:[] //当前选中的pic
     ,onEditList: [] //正在编辑的pic
+    ,list: []
   },
   actions: {
+    add({state},list){
+      state.list = list
+    },
     addCheckedList({state},list){
       let checked = state.checkedList
       if(typeof list == "String")
