@@ -79,12 +79,20 @@ export default {
     },
     confirm(){
       //需要去更新数据
+      this.$message({
+        type: 'info',
+        message: '创建成功！'
+      })
       this.$router.push({
         name: 'picture'
       })
     },
     cancel(){
       //如果图片上传了，需要把数据库里的数据删除，或者把信息存储到本地
+      this.$message({
+        type: 'info',
+        message: '新增取消！'
+      })
       this.$router.push({
         name: 'picture'
       })

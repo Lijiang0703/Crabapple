@@ -40,7 +40,7 @@ export default {
     Topbar,
   },
   computed:{
-    dataList:()=>{
+    dataList (){
       const list = this.$store.state.pic.list
       return list
     }
@@ -96,10 +96,11 @@ export default {
     }
   },
   mounted(){
+    const $this = this
     getPics().then((res)=>{
       if(res.code == 200){
         const data = res.data
-        this.$store.dispatch('pic/add',data)
+        $this.$store.dispatch('add',data)
         // this.dataList = data;
       }
     })
