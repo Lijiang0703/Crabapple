@@ -15,11 +15,11 @@
               <img :src="item.url" alt="">
               <i class="el-icon-success published" @click="publish"></i>
             </div>
-            <!-- <div class="mask">
+            <div class="mask">
               <div class="mask-content">
                 <i class="el-icon-edit" @click="edit"></i>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </el-main>
@@ -147,14 +147,14 @@ export default {
         &:hover
           .mask
             display: block
-            background: #ccc
+            /* background: #ccc */
             position: absolute
             width: 100%
             height: 100%
             left: 0
             top: 0
             .mask-content
-              background: white
+              /* background: white */
               margin-top: 50%
               transform: translateY(-50%)
               i

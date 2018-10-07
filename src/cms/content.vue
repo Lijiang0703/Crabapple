@@ -1,7 +1,11 @@
 <template>
     <el-container class="content">
       <el-header class="top_head" height="50px">
-        <Topbar></Topbar>
+        <Topbar
+        @create= "create"
+        @publish= "publish"
+        @remove= "remove">
+        </Topbar>
       </el-header>
       <el-main>
         <div class="filter">
@@ -35,9 +39,9 @@
               label="描述">
             </el-table-column>
           </el-table>
-          <el-dialog title="内容编辑" :visible.sync="showDialog">
-            <contentEdit :form="currentData"></contentEdit>
-          </el-dialog>
+          <!-- <el-dialog title="内容编辑" :visible.sync="showDialog"> -->
+            <!-- <contentEdit :form="currentData"></contentEdit> -->
+          <!-- </el-dialog> -->
         </div>
         <div class="page">
           <el-pagination
@@ -53,7 +57,7 @@
 </template>
 
 <script>
-import contentEdit from "@/cms/contentEdit"
+// import contentEdit from "@/cms/contentEdit"
 import Topbar from "@/components/topbar"
 export default{
   data(){
@@ -105,10 +109,19 @@ export default{
     },
     handleCurrentChange:function(current){
       console.log(current)
+    },
+    create(){
+
+    },
+    publish(){
+
+    },
+    remove(){
+
     }
   },
   components:{
-    contentEdit,
+    // contentEdit,
     Topbar
   }
 }
