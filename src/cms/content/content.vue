@@ -105,7 +105,11 @@ export default{
   methods:{
     select:function(selection,row){
       // this.openEditDialog(selection)
-      this.showDialog = true
+      // this.showDialog = true
+      console.log(111)
+      this.$router.push({
+        name: 'c_edit'
+      })
     },
     handleCurrentChange:function(current){
       console.log(current)

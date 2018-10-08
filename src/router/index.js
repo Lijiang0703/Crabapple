@@ -4,7 +4,8 @@ import Timeline from '@/components/Timeline'
 import Login from '@/cms/login'
 import Workspace from '@/cms/workspace'
 import Statistic from '@/cms/statistic'
-import Content from '@/cms/content'
+import Content from '@/cms/content/content'
+import ContentEdit from '@/cms/content/edit'
 import Picture from '@/cms/picturetown'
 import PicEdit from '@/cms/picture/edit'
 import Home from '@/frontsite/home/home'
@@ -32,15 +33,26 @@ export default new Router({
         {
           path:'/content',
           name: 'content',
-          component: Content
+          component: Content,
+          children:[
+
+          ]
+        },
+        {
+          path: '/content/edit',
+          name: 'c_edit',
+          component:ContentEdit
         },
         {
           path:'/picture',
           name: 'picture',
-          component: Picture
+          component: Picture,
+          children: [
+
+          ]
         },
         {
-          path:'pic_edit',
+          path: '/picture/edit',
           name: 'pic_edit',
           component: PicEdit
         }
