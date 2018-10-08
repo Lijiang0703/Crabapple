@@ -48,7 +48,8 @@
   import { quillEditor } from 'vue-quill-editor'
   import InfoTopbar from '@/components/infoTopbar'
 
-  import { create } from '@/api/content'
+  import { create,getContent } from '@/api/content'
+  import { getUrlQuery } from '@/common/js/util'
 
   export default{
     data(){
@@ -77,6 +78,22 @@
             value: 'yw'
           }
         ]
+      }
+    },
+    props:{
+      id: {
+        type: [String,Number],
+        default: ""
+      }
+    },
+    created: function(){
+      const id = this.id || getUrlQuery(id)  //当前页刷新的情况
+      if(id){
+        getContent({
+          id: id
+        }).then((res)=>{
+          this.form = res.data.result
+        })
       }
     },
     mounted:function(){
@@ -111,10 +128,15 @@
         })
       },
       onTempSave:function(){
-
+        const form = this.form
+        const tempBlog = window.localStorage.getItem('blogs')
+        tempBlog[form.id] = form
+        window.localStorage.setItem('blogs',tempBlog)
       },
       onCancel:function(){
-
+        this.$router.push({
+          name: 'picture'
+        })
       },
       handlePreview:function(){
 
