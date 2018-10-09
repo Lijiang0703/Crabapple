@@ -39,7 +39,12 @@ export default new Router({
           ]
         },
         {
-          path: '/content/edit',
+          path: '/content_edit',
+          name: 'c_edit',
+          component:ContentEdit
+        },
+        {
+          path: '/content_edit/:id',
           name: 'c_edit',
           component:ContentEdit
         },

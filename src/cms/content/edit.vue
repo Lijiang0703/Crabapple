@@ -48,24 +48,14 @@
   import { quillEditor } from 'vue-quill-editor'
   import InfoTopbar from '@/components/infoTopbar'
 
-  import { create,getContent } from '@/api/content'
+  import { createContent,updateContent,getContent } from '@/api/content'
   import { getUrlQuery } from '@/common/js/util'
+  import _ from 'lodash'
 
   export default{
     data(){
       return {
-        form:{
-          id: 1,
-          title: '周一打卡',
-          date: '2018-06-20',
-          photos: 4,
-          content: "",
-          cover: '',
-          author: 'cll',
-          desc: '这是一个描述',
-          rate:'喜爱程度',
-          state: 0 //发布状态
-        },
+        form:{},
         fileList2:[],
         editorOptions:{
           placeholder: "write your blog"
@@ -86,26 +76,48 @@
         default: ""
       }
     },
-    created: function(){
-      const id = this.id || getUrlQuery(id)  //当前页刷新的情况
-      if(id){
-        getContent({
-          id: id
-        }).then((res)=>{
-          this.form = res.data.result
-        })
-      }
-    },
-    mounted:function(){
-      console.log(this.props,this.key)
+    mounted: function(){
+      this.getData()
     },
     components:{
       quillEditor,
       InfoTopbar
     },
     methods:{
-      change: function(){
+      getData: function(){
+        const id = this.$route.params.id
+        const local = window.localStorage.getItem('blogs') || "{}"
+        const tempBlog = JSON.parse(local)[id]
 
+        if(tempBlog){
+          this.$confirm('是否应用本地修改内容','提示',{
+             confirmButtonText: '确定',
+             cancelButtonText: '取消',
+             type: 'info'
+          }).then(()=>{
+            this.$message({
+              type: 'info',
+              message: '应用成功!'
+            });
+            this.form = tempBlog
+          }).catch(()=>{
+            this.$message({
+              type: 'info',
+              message: '取消本地修改!'
+            });
+            this.getContentById(id)
+          })
+        }else{
+          this.getContentById(id)
+        }
+      },
+      getContentById:function(id){
+        if(id)
+          getContent(id).then((res)=>{
+            this.form = res.result[0]
+          })
+      },
+      change: function(){ //文本change
       },
       querySearch(queryString, cb) {
         var authors = this.authors;
@@ -116,33 +128,62 @@
         cb(results);
       },
       onSubmit:function(){
-        // console.log(form.content)
         const form = this.form
-        const blog = {
-          title: form.title,
-          content: form.content,
-          author: form.author
+        const blog = _.pick(form,['title','content','author','id'])
+        if(blog.id){
+          // 是否要全部更新
+          updateContent(blog).then((res)=>{
+            //同时取消本地的修改
+            this.removeTempSave(blog.id)
+            this.back()
+          })
         }
-        create(blog).then((res)=>{
-          console.log(res)
-        })
+        else{
+          createContent(blog).then((res)=>{
+            this.back()
+          })
+        }
       },
       onTempSave:function(){
-        const form = this.form
-        const tempBlog = window.localStorage.getItem('blogs')
+        const form = _.pick(this.form,['title','content','author','id'])
+        const local = window.localStorage.getItem('blogs') || "{}"
+        const tempBlog = JSON.parse(local)
+
         tempBlog[form.id] = form
-        window.localStorage.setItem('blogs',tempBlog)
+        window.localStorage.setItem('blogs',JSON.stringify(tempBlog))
+        this.$message({
+          type: 'info',
+          message: '暂存成功!'
+        })
+        this.back()
+      },
+      removeTempSave:function(id){
+        const local = window.localStorage.getItem('blogs')
+        if(local){
+          let tempBlog = JSON.parse(local)
+          const temp = tempBlog[id]
+
+          if(temp){
+            _.unset(tempBlog,[id])
+            console.log(tempBlog)
+            window.localStorage.setItem('blogs',JSON.stringify(tempBlog))
+          }
+        }
       },
       onCancel:function(){
+        this.back()
+      },
+      back:function(){
         this.$router.push({
-          name: 'picture'
+          name: 'content'
         })
-      },
-      handlePreview:function(){
-
-      },
-      handleRemove:function(){
-
+      }
+    },
+    watch:{
+      '$route':function(to,from){
+        // 复用组件
+        if(to.name == "c_edit")
+          this.getData()
       }
     }
   }

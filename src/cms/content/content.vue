@@ -13,7 +13,7 @@
         </div>
         <div class="contentlist">
           <el-table
-            :data="content_data"
+            :data="contentList"
             :stripe=true
             :highlight-current-row = true
             border
@@ -59,10 +59,12 @@
 <script>
 // import contentEdit from "@/cms/contentEdit"
 import Topbar from "@/components/topbar"
+import { getContent,removeContent } from '@/api/content'
+
 export default{
   data(){
     return {
-      content_data :[
+      contentList :[
         {
           id: 1,
           title: '周一打卡',
@@ -102,26 +104,46 @@ export default{
       currentData: {}
     }
   },
+  created(){
+    this.getData()
+  },
   methods:{
+    getData:function(){
+      getContent(null,{
+        page: 1,
+        size: 20
+      }).then((res)=>{
+        const data = res.result
+        this.contentList = data
+      })
+    },
     select:function(selection,row){
-      // this.openEditDialog(selection)
-      // this.showDialog = true
-      console.log(111)
       this.$router.push({
-        name: 'c_edit'
+        name: 'c_edit',
+        params: {
+          id: selection.id
+        }
       })
     },
     handleCurrentChange:function(current){
       console.log(current)
     },
     create(){
-
+      this.$router.push({
+        name: 'c_edit'
+      })
     },
     publish(){
 
     },
     remove(){
 
+    }
+  },
+  watch:{
+    '$route':function(to,from){
+      if(from.name == "c_edit")
+        this.getData()
     }
   },
   components:{
