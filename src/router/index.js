@@ -10,6 +10,7 @@ import Picture from '@/cms/picturetown'
 import PicEdit from '@/cms/picture/edit'
 import Home from '@/frontsite/home/home'
 import Photo from '@/frontsite/photo/photo'
+import Blog from '@/frontsite/blog/blog'
 
 Vue.use(Router)
 
@@ -69,9 +70,14 @@ export default new Router({
       component: Home
     },
     {
-      path:'/photo',
+      path: '/photo',
       name: 'photo',
       component: Photo
+    },
+    {
+      path: '/blog',
+      name: 'blog',
+      component: Blog
     }
   ]
 })
