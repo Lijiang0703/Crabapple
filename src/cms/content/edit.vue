@@ -28,6 +28,13 @@
               placeholder="作者">
             </el-autocomplete>
           </el-form-item>
+          <el-form-item label="标签">
+            <!-- <el-autocomplete
+              v-model="form.tags"
+              placeholder="">
+            </el-autocomplete> -->
+            <el-input v-model="form.tags"></el-input>
+          </el-form-item>
         </el-form>
       </el-main>
       <el-footer>
@@ -129,7 +136,7 @@
       },
       onSubmit:function(){
         const form = this.form
-        const blog = _.pick(form,['title','content','author','id'])
+        const blog = _.pick(form,['title','content','author','tags','id'])
         if(blog.id){
           // 是否要全部更新
           updateContent(blog).then((res)=>{
@@ -145,7 +152,7 @@
         }
       },
       onTempSave:function(){
-        const form = _.pick(this.form,['title','content','author','id'])
+        const form = _.pick(this.form,['title','content','author','tags','id'])
         const local = window.localStorage.getItem('blogs') || "{}"
         const tempBlog = JSON.parse(local)
 

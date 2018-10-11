@@ -12,7 +12,7 @@
     <div class="mian-wrap">
       <div class="summary" v-text="title"></div>
       <slot name="main"></slot>
-      <div class="next">
+      <div class="page" v-if="!noPage">
         <!-- 考虑到图片的数量和大小 采用分页的方式-->
         <span @click="prev">prev</span>
         <span @click="next">next</span>
@@ -37,6 +37,10 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    noPage: {
+      type: Boolean,
+      default: false
     }
   },
   components:{
@@ -109,7 +113,8 @@ export default {
     .summary
       text-align: center
       padding-bottom: 30px
-    .next
+      font-family:'Malapropism'
+    .page
       text-align: center
       margin-top: 30px
       display: flex
