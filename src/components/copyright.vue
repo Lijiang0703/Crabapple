@@ -20,8 +20,8 @@ export default {
 
 <style lang="stylus">
 .copyright
-  margin-top: 30px
-  margin-bottom: 30px
+  padding-top: 30px
+  padding-bottom: 30px
   text-align: left
   font-family: "PT Serif", Arial, Tahoma, sans-serif
   width: 100%

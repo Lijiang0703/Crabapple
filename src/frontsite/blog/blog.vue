@@ -1,15 +1,16 @@
 <template>
-  <Theme :title="title" :noPage="noPage">
+  <Theme :title="title" :noPage="noPage" class="blogpage">
     <div class="front-blog" slot="main">
       <div class="blog-wrap">
         <dl class="blog-list">
-          <dt class="blog-item" v-for="item in blogs" v-if="item.content">
+          <dt class="blog-item" v-for="(item,index) in blogs" v-if="item.content">
             <div class="tags" v-if="item.tags">
               <div class="tag">
                 <p class="triangle"></p>
                 <span class="name" v-text="item.tags"></span>
               </div>
             </div>
+            <!-- <p class="title" v-text="index + '. '+item.title"></p> -->
             <p class="title" v-text="item.title"></p>
             <p class="info">
               <img src="../../assets/date.svg" alt="">
@@ -59,15 +60,18 @@ export default {
 </script>
 <style lang="stylus">
 @import '~@/common/css/base'
+/* .blogpage */
+  /* background: rgba(0,0,0,0.1) */
 .front-blog
   .blog-wrap
     padding: 30px 0
     width: 60%
-    /* margin-left: 50%
-    transform: translateX(-50%) */
+    margin-left: 50%
+    transform: translateX(-50%)
     .blog-list
       .blog-item
         /* background: $simple_color */
+        background: $white
         width: 100%
         position: relative
         padding: 30px 40px
@@ -110,7 +114,8 @@ export default {
           margin-top: 20px
           margin-bottom: 20px
           color: $g-black
-          /* font-weight: bolder */
+          text-align: center
+          font-weight: bolder
         .info
           font-size: 14px
           line-height: 14px
@@ -118,6 +123,7 @@ export default {
           align-items: center
           color: $high_simple_color
           font-weight: 500
+          justify-content: center
           *
             display: inline-block
             margin-right:10px
