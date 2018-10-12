@@ -2,14 +2,15 @@
     <el-container class="content">
       <el-header class="top_head" height="50px">
         <Topbar
+        :commandList = "moreConfig"
         @create= "create"
         @publish= "publish"
-        @remove= "remove">
+        @remove= "remove"
+        @command= "handleCommand">
         </Topbar>
       </el-header>
       <el-main>
         <div class="filter">
-
         </div>
         <div class="contentlist">
           <el-table
@@ -17,22 +18,32 @@
             :stripe=true
             :highlight-current-row = true
             border
-            height="250"
+            ref="multiBlogs"
             @row-dblclick="select"
+            @selection-change="handleSelectionChange"
             class="content_table">
             <el-table-column
               type="selection"
               width="55">
             </el-table-column>
             <el-table-column
-              prop ="title"
               sortable
-              label="标题">
+              label="标题"
+              width="150">
+              <template slot-scope="scope">
+                <span v-text="scope.row.title"></span>
+                <i class="el-icon-star-on published" v-if="scope.row.published"></i>
+              </template>
             </el-table-column>
             <el-table-column
-              prop ="date"
+              prop ="updatedAt"
               sortable
               label="日期">
+            </el-table-column>
+            <el-table-column
+              prop ="tags"
+              label="分类"
+              width="150">
             </el-table-column>
             <el-table-column
               prop ="desc"
@@ -49,6 +60,7 @@
             :current-page = "currentpage"
             :total="100"
             :pager-count="5"
+            background
             layout="prev,pager,next,jumper"
           ></el-pagination>
         </div>
@@ -59,59 +71,32 @@
 <script>
 // import contentEdit from "@/cms/contentEdit"
 import Topbar from "@/components/topbar"
-import { getContent,removeContent } from '@/api/content'
+import { getContent,removeContent,updateContent } from '@/api/content'
 
 export default{
   data(){
     return {
-      contentList :[
-        {
-          id: 1,
-          title: '周一打卡',
-          date: '2018-06-20',
-          photos: 4,
-          cover: '',
-          author: 'cll',
-          desc: '这是一个描述',
-          rate:'喜爱程度',
-          state: 0 //发布状态
-        },
-        {
-          id: 2,
-          title: '周二打卡',
-          date: '2018-06-12',
-          photos: 4,
-          cover: '',
-          author: 'cll',
-          desc: '这是一个描述',
-          rate:'喜爱程度',
-          state: 0 //发布状态
-        },
-        {
-          id: 2,
-          title: '周三打卡',
-          date: '2018-06-01',
-          photos: 4,
-          cover: '',
-          author: 'cll',
-          desc: '这是一个描述',
-          rate:'喜爱程度',
-          state: 0 //发布状态
-        }
-      ],
+      contentList :[],
       currentpage: 0,
       showDialog: false,
-      currentData: {}
+      currentData: {},
+      moreConfig: [
+        {
+          name: "取消发布",
+          command: 1
+        }
+      ],
+      selections: []
     }
   },
   created(){
     this.getData()
   },
   methods:{
-    getData:function(){
+    getData:function(page,size){
       getContent(null,{
-        page: 1,
-        size: 20
+        page: page,
+        size: size
       }).then((res)=>{
         const data = res.result
         this.contentList = data
@@ -127,17 +112,52 @@ export default{
     },
     handleCurrentChange:function(current){
       console.log(current)
+      this.getData(current)
+    },
+    handleSelectionChange(val){
+      this.selections = val
     },
     create(){
       this.$router.push({
         name: 'c_edit'
       })
     },
-    publish(){
-
+    publish:function(unPublish){
+      const ids = _.map(this.selections,selection=>{
+        return selection.id
+      })
+      const $this = this;
+      updateContent({
+        data:{
+          published: !unPublish
+        },
+        ids: ids
+      }).then((res)=>{
+        //更新数据
+        for(let i=0;i<$this.contentList.length;i++){
+          const blog = $this.contentList[i]
+          if(!ids.length) break;
+          const index = ids.indexOf(blog.id)
+          if(index!=-1){
+              blog.published = !unPublish
+              ids.splice(index,1)
+          }
+        }
+        $this.$refs.multiBlogs.clearSelection()
+        $this.selections = []
+      })
     },
     remove(){
 
+    },
+    handleCommand(command){
+      switch (command) {
+        case 1:
+          this.publish(true)
+          break;
+        default:
+          break;
+      }
     }
   },
   watch:{
@@ -160,6 +180,10 @@ export default{
     text-align: left
     tr
       cursor: pointer
+      .published
+        color: $site_strong
+        font-size: 16px
+        margin-left: 10px
   .page
     position:absolute
     bottom:20px

@@ -5,7 +5,7 @@ const getContent = (id,opts)=>{
   let url = baseUrl
   if(id) url+= id
   if(opts){
-    url+= "?page=" + (opts.page || 1) + "&size=" + (opts.size || 20)
+    url+= "?page=" + (opts.page || 1) + "&size=" + (opts.size || 3)
   }
   return axios({
       url: url,
@@ -35,9 +35,13 @@ const createContent = (data)=>{
 }
 
 const updateContent = (data)=>{
-  const id = data.id
+  const ids = data.ids
+  let url = baseUrl
+  if(typeof ids == "String"){
+    url += ids
+  }
   return axios({
-    url: baseUrl + id,
+    url: url,
     method: 'put',
     data: data
   }).then(res=>{

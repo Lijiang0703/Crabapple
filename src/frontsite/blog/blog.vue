@@ -63,6 +63,7 @@ export default {
 /* .blogpage */
   /* background: rgba(0,0,0,0.1) */
 .front-blog
+  /* background: rgba(0,0,0,0.1) */
   .blog-wrap
     padding: 30px 0
     width: 60%
