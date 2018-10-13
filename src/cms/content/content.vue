@@ -36,7 +36,8 @@
               </template>
             </el-table-column>
             <el-table-column
-              prop ="updatedAt"
+              prop= "createAt"
+              :formatter = "parseDate"
               sortable
               label="日期">
             </el-table-column>
@@ -101,6 +102,10 @@ export default{
         const data = res.result
         this.contentList = data
       })
+    },
+    parseDate(row,column){
+      const date = new Date(row.createdAt)
+      return date.toLocaleString()
     },
     select:function(selection,row){
       this.$router.push({
