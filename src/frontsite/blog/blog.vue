@@ -10,7 +10,6 @@
                 <span class="name" v-text="item.tags"></span>
               </div>
             </div>
-            <!-- <p class="title" v-text="index + '. '+item.title"></p> -->
             <p class="title" v-text="item.title"></p>
             <p class="info">
               <img src="../../assets/date.svg" alt="">
@@ -29,6 +28,16 @@
         </dl>
         <div class="more">
           <input type="button" value="Get More"/>
+        </div>
+      </div>
+      <div class="info-wrap">
+        <div class="authors">
+
+        </div>
+        <div class="tags">
+          <dl class="tag-item">
+            <span>js</span>
+          </dl>
         </div>
       </div>
     </div>
@@ -51,7 +60,9 @@ export default {
     Theme
   },
   created(){
-      getContent().then((res)=>{
+      getContent(null,{
+        published: true
+      }).then((res)=>{
         const data = res.result
         this.blogs = data
       })
@@ -64,11 +75,12 @@ export default {
   /* background: rgba(0,0,0,0.1) */
 .front-blog
   /* background: rgba(0,0,0,0.1) */
+  display: flex
   .blog-wrap
     padding: 30px 0
     width: 60%
-    margin-left: 50%
-    transform: translateX(-50%)
+    /* margin-left: 50%
+    transform: translateX(-50%) */
     .blog-list
       .blog-item
         /* background: $simple_color */

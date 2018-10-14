@@ -5,6 +5,8 @@ const getContent = (id,opts)=>{
   let url = baseUrl
   if(id) url+= id
   if(opts){
+    if(opts.published)
+      url+= "/blogs"
     url+= "?page=" + (opts.page || 1) + "&size=" + (opts.size || 3)
   }
   return axios({
@@ -14,6 +16,7 @@ const getContent = (id,opts)=>{
       return Promise.resolve(res.data)
     })
 }
+
 
 const removeContent = (id)=>{
   return axios({
