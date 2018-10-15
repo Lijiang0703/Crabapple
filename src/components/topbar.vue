@@ -15,7 +15,7 @@
             <i class="el-icon-more"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-for="item in commandList" :command="item.command" v-text="item.name"></el-dropdown-item>
+            <el-dropdown-item v-for="(item,key) in commandList" :key="key" :command="item.command" v-text="item.name"></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>

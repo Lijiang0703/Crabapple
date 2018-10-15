@@ -2,7 +2,7 @@
     <el-container class="content">
       <el-header class="top_head" height="50px">
         <Topbar
-        :commandList = "moreConfig"
+        :commandList= "moreConfig"
         @create= "create"
         @publish= "publish"
         @remove= "remove"

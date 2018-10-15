@@ -18,7 +18,9 @@ const removePic = (data)=>{
   })
 }
 
+const postPic = baseUrl
 export {
   getPics,
-  removePic
+  removePic,
+  postPic
 }

@@ -12,7 +12,7 @@
           <el-form-item label="图片地址/上传图片:">
             <el-upload
               :file-list="picData.pictures"
-              action="http://upload.qiniup.com"
+              :action="picData.url"
               :data="picData.uploadData"
               :before-upload="handleBeforeUpload"
               :on-success="handleSuccess"
@@ -36,6 +36,8 @@
 <script>
 import getToken from "../../api/upload"
 import InfoTopbar from '@/components/infoTopbar'
+import CanvasCompress from "canvas-compress"
+import {postPic} from "../../api/pic"
 
 export default {
   data(){
@@ -45,7 +47,7 @@ export default {
         // address: "",
         describe: "",
         pictures:[],
-
+        url: postPic,
         uploadData: {
         } //上传时带的参数
       },
@@ -65,15 +67,24 @@ export default {
     InfoTopbar
   },
   mounted(){
-    console.log(1)
+    console.log(postPic)
   },
   methods:{
-    handleBeforeUpload(){
-      const $this = this
-      return getToken().then((res)=>{
-        const token = res.data.token
-        $this.picData.uploadData.token = token
-      })
+    async handleBeforeUpload(file){
+      // const $this = this
+      // return getToken().then((res)=>{
+      //   const token = res.data.token
+      //   $this.picData.uploadData.token = token
+      // })
+      const compressor = new CanvasCompress({
+          type: CanvasCompress.MIME.JPG,
+          width: 1000,
+          height: 618,
+          quality: 0.9,
+      });
+      const {source,result} = await compressor.process(file)
+      console.log(result.blob)
+      return Promise.resolve(result.blob)
     },
     handleSuccess(res){
       console.log(res)
