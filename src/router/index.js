@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Timeline from '@/components/Timeline'
-import Login from '@/cms/login'
+// import Login from '@/cms/login'
 import Workspace from '@/cms/workspace'
 import Statistic from '@/cms/statistic'
 import Content from '@/cms/content/content'
 import ContentEdit from '@/cms/content/edit'
 import Picture from '@/cms/picturetown'
 import PicEdit from '@/cms/picture/edit'
-import Home from '@/frontsite/home/home'
+// import Home from '@/frontsite/home/home'
 import Photo from '@/frontsite/photo/photo'
 import Blog from '@/frontsite/blog/blog'
 
@@ -19,7 +19,9 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      // component: Login
+      // component: (resolve)=> require(['@/cms/login'],resolve)
+      component: import(/*webpackChunkName: "login"*/'@/cms/login')
     },
     {
       path: '/',
@@ -67,7 +69,8 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      // component: Home
+      component: (resolve)=> require(['@/frontsite/home/home'],resolve)
     },
     {
       path: '/photo',
@@ -77,7 +80,14 @@ export default new Router({
     {
       path: '/blog',
       name: 'blog',
-      component: Blog
+      component: Blog,
+      children:[
+      ]
+    },
+    {
+      path:'/blog/:id',
+      name: 'blog_detail',
+      component: (resolve)=> require(['@/frontsite/blog/detail'],resolve)
     }
   ]
 })

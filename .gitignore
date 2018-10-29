@@ -17,3 +17,4 @@ yarn-error.log*
 
 package-lock.json
 .gitignore
+/src/assets/back_star.jpeg

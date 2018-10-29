@@ -1,7 +1,7 @@
 <template>
-  <Theme :title="title" :noPage="noPage" class="blogpage">
+  <Theme :title="title" :noPage="noPage" :showMenuNav="showMenuNav" class="blogpage" @toggleMenu="menuToggle">
     <div class="front-blog" slot="main">
-      <div class="blog-wrap">
+      <div class="blog-wrap" :class="{center: !infoToggle}">
         <dl class="blog-list">
           <dt class="blog-item" v-for="(item,index) in blogs" v-if="item.content">
             <div class="tags" v-if="item.tags">
@@ -22,21 +22,41 @@
               <p v-html="item.content"></p>
             </div>
             <div class="btn-detail">
-              <input type="button" value="Read More"/>
+              <input type="button" value="Read More" @click="toDetail(item.id)"/>
             </div>
           </dt>
         </dl>
         <div class="more">
-          <input type="button" value="Get More"/>
+          <input type="button" value="Get More" @click="next"/>
         </div>
       </div>
-      <div class="info-wrap">
+      <div class="info-wrap" v-show="infoToggle">
         <div class="authors">
-
+          <div class="author-info">
+            <img src="../../assets/logo.png" alt="">
+            <span>中二少女的blog</span>
+          </div>
         </div>
         <div class="tags">
           <dl class="tag-item">
+            <img src="../../assets/tag.svg" alt="">
             <span>js</span>
+          </dl>
+          <dl class="tag-item">
+            <img src="../../assets/tag.svg" alt="">
+            <span>css</span>
+          </dl>
+          <dl class="tag-item">
+            <img src="../../assets/tag.svg" alt="">
+            <span>网络</span>
+          </dl>
+          <dl class="tag-item">
+            <img src="../../assets/tag.svg" alt="">
+            <span>vue</span>
+          </dl>
+          <dl class="tag-item">
+            <img src="../../assets/tag.svg" alt="">
+            <span>react</span>
           </dl>
         </div>
       </div>
@@ -51,9 +71,11 @@ export default {
     return {
       title: "RECORD THE LEARNING",
       noPage: true,
+      showMenuNav: true,
       blogs:[
         {},{}
-      ]
+      ],
+      infoToggle: false
     }
   },
   components: {
@@ -66,21 +88,40 @@ export default {
         const data = res.result
         this.blogs = data
       })
+  },
+  methods:{
+    menuToggle:function(){
+      this.infoToggle = !this.infoToggle
+    },
+    toDetail:function(id){
+      //跳转到详情页
+      this.$router.push({
+        name: "blog_detail",
+        params:{
+          id: id
+        }
+      })
+    },
+    next:function() {
+
+    }
   }
 }
 </script>
 <style lang="stylus">
 @import '~@/common/css/base'
-/* .blogpage */
-  /* background: rgba(0,0,0,0.1) */
+.blogpage
+  background: rgba(0,0,0,0.1)
 .front-blog
   /* background: rgba(0,0,0,0.1) */
   display: flex
+  position: relative
   .blog-wrap
     padding: 30px 0
-    width: 60%
-    /* margin-left: 50%
-    transform: translateX(-50%) */
+    width: 70%
+    &.center
+      margin-left: 50%
+      transform: translateX(-50%)
     .blog-list
       .blog-item
         /* background: $simple_color */
@@ -181,4 +222,37 @@ export default {
         transition: all ease 0.3s
         &:hover
           background: $logo_gray_high
+  .info-wrap
+    width: 20%
+    position: absolute
+    right: 50px
+    padding: 20px 15px
+    .authors
+      padding: 10px 15px
+      border-bottom: 2px dashed #ccc
+      .author-info
+        display: flex
+        flex-direction: column
+        align-items: center
+        img
+          width: 60px
+          height: 60px
+          border-radius: 50%
+          margin-bottom: 10px
+        span
+          font-size: 16px
+          display: block
+    .tags
+      display: flex
+      flex-wrap: wrap
+      padding: 20px 15px
+      .tag-item
+        display: flex
+        align-items: center
+        padding: 5px
+        img
+          width: 20px
+          height: 20px
+        /* span  */
+
 </style>

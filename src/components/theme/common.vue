@@ -10,7 +10,10 @@
       </div>
     </div>
     <div class="mian-wrap">
-      <div class="summary" v-text="title"></div>
+      <div class="summary">
+        <span v-text="title"></span>
+        <img v-if="showMenuNav" src="../../assets/icon-menu-list.svg" alt="" class="menulist" @click="toggleMenu">
+      </div>
       <slot name="main"></slot>
       <div class="page" v-if="!noPage">
         <!-- 考虑到图片的数量和大小 采用分页的方式-->
@@ -41,6 +44,10 @@ export default {
     noPage: {
       type: Boolean,
       default: false
+    },
+    showMenuNav:{
+      type: Boolean,
+      default: false
     }
   },
   components:{
@@ -53,6 +60,9 @@ export default {
     },
     next(){
       this.$emit('next')
+    },
+    toggleMenu(){
+      this.$emit('toggleMenu')
     }
   }
 }
@@ -114,10 +124,20 @@ export default {
       text-align: center
       padding-bottom: 30px
       font-family:'Malapropism'
+      position: relative
+      /* display: block
+      align-items: center */
+      .menulist
+        width: 20px
+        height: 20px
+        position: absolute
+        right: 0
+        cursor: pointer
     .page
       text-align: center
       margin-top: 30px
       display: flex
+      flex-wrap: no-wrap
       justify-content: center
       span
         margin-right: 10px
