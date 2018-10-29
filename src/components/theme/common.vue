@@ -117,7 +117,7 @@ export default {
   .mian-wrap
     padding-top: 50px
     padding-bottom: 50px
-    border-top: 1px solid
+    border-top: 1px solid $border_color
     border-bottom: 1px solid $border_color
     text-align: left
     .summary

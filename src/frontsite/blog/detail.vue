@@ -1,19 +1,27 @@
 <template>
-  <div class="blog_detail">
-    <div class="blog_wrap">
-      <div class="wrap">
-        <div class="title">
-          <span v-text="title"></span>
-        </div>
-        <div class="content" v-html="content">
+  <Theme noPage="true" :title="title">
+    <div class="blog_detail" slot="main">
+      <div class="blog_wrap">
+        <div class="wrap">
+          <!-- <div class="title">
+            <span v-text="title"></span>
+          </div> -->
+          <div class="content" v-html="content">
+          </div>
+          <div class="tool">
+              <span>时间: 2018/9/12</span>
+              <span>作者: yw</span>
+              <img class="back" src="../../assets/back.png" alt="" @click="back">
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Theme>
 </template>
 <script>
 import { getContent } from "@/api/content"
 
+import Theme from "@/components/theme/common"
 export default {
   data(){
     return {
@@ -36,7 +44,15 @@ export default {
         this.getBlog(id)
         this.id = id
       }
+    },
+    back:function(){
+      this.$router.push({
+        name: 'blog'
+      })
     }
+  },
+  components:{
+    Theme
   },
   created: function(){
     this.updateRouter()
@@ -51,10 +67,10 @@ export default {
 <style lang="stylus">
 .blog_detail
   width: 100%
-  height: 1024px
+  /* height: 1024px */
   /* background: url("../../assets/back_star.jpeg") no-repeat */
-  background: #ccc
-  background-size: cover
+  /* background: #ccc */
+  /* background-size: cover */
   padding: 20px 0
   .blog_wrap
     background: rgba(255,255,255,0.5)
@@ -68,4 +84,21 @@ export default {
     text-align: left
     .title
       font-size: 20px
+    .tool
+      font-size: 14px
+      display: flex
+      flex-direction: column
+      position: relative
+      span
+        margin-bottom: 5px
+      .back
+        position: absolute
+        cursor: pointer
+        right: 0
+        bottom: 0
+        width: 25px
+        height: 25px
+        transition: all ease 0.2s
+        &:hover
+          transform: scale(1.2)
 </style>

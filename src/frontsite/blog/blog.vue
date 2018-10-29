@@ -125,7 +125,7 @@ export default {
     .blog-list
       .blog-item
         /* background: $simple_color */
-        background: $white
+        background: rgba(255,255,255,0.5)
         width: 100%
         position: relative
         padding: 30px 40px
@@ -228,6 +228,7 @@ export default {
     right: 50px
     padding: 20px 15px
     .authors
+      /* display: none */
       padding: 10px 15px
       border-bottom: 2px dashed #ccc
       .author-info
