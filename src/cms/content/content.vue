@@ -51,9 +51,6 @@
               label="描述">
             </el-table-column>
           </el-table>
-          <!-- <el-dialog title="内容编辑" :visible.sync="showDialog"> -->
-            <!-- <contentEdit :form="currentData"></contentEdit> -->
-          <!-- </el-dialog> -->
         </div>
         <div class="page">
           <el-pagination

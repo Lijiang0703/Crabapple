@@ -13,6 +13,9 @@
           <el-form-item label="标题">
             <el-input v-model="form.title"></el-input>
           </el-form-item>
+          <el-form-item label="描述">
+            <el-input type="textarea" v-model="form.desc"></el-input>
+          </el-form-item>
           <el-form-item label="正文" class="editor">
             <quillEditor
             v-model= "form.content"
@@ -23,17 +26,18 @@
           </el-form-item>
           <el-form-item label="作者">
             <el-autocomplete
+              class="c_autocomplete"
               v-model="form.author"
               :fetch-suggestions="querySearch"
               placeholder="作者">
             </el-autocomplete>
           </el-form-item>
           <el-form-item label="标签">
-            <!-- <el-autocomplete
+            <el-autocomplete
+              class="c_autocomplete"
               v-model="form.tags"
-              placeholder="">
-            </el-autocomplete> -->
-            <el-input v-model="form.tags"></el-input>
+              placeholder="标签">
+            </el-autocomplete>
           </el-form-item>
         </el-form>
       </el-main>
@@ -204,4 +208,8 @@
     height: 70%
   .el-footer
     margin-top: 30px
+  .c_autocomplete
+    position: absolute
+    left: 0
+    /* width: 50% */
 </style>
