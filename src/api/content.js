@@ -1,4 +1,5 @@
-import axios from 'axios'
+// import axios from 'axios'
+import axios from './index'
 
 const baseUrl = process.env.REQUEST_URL + '/content/'
 const getContent = (id,opts)=>{

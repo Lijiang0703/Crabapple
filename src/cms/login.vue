@@ -71,6 +71,9 @@
             this.$router.push({
               name: "workspace"
             })
+            //保存jwt在本地
+            if(res.data)
+              window.localStorage.setItem("crabapple_author",res.data)
           }
           else
             this.log_fail = true
